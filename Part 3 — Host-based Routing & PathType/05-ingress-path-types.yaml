@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pathtype-demo
+
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  
+  - host: myapp.local
+    http:
+      paths:
+
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp-svc
+            port:
+              number: 80
+
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-svc
+            port:
+              number: 80
+
+      - path: /admin
+        pathType: Exact
+        backend:
+          service:
+            name: admin-svc
+            port:
+              number: 80
+

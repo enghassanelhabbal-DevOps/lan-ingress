@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp-app
+  template:
+  - name: webapp-pod
+    metadata:
+      labels:
+        app: webapp-app
+    spec:
+      containers:
+      - name: webapp-container
+        image: hashicorp/http-echo
+        args:
+        - "-text=webapp"
+        ports:
+        - containerPort: 5678
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-svc
+spec:
+  selector:
+    app: webapp-app
+  ports:
+  - port: 80
+    targetPort: 5678
+  type: ClusterIP
+
+
+
+
+
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-app
+  template:
+  - name: api-pod
+    metadata:
+      labels:
+        app: api-app
+    spec:
+      containers:
+      - name: api-container
+        image: hashicorp/http-echo
+        args:
+        - "-text=api"
+        ports:
+        - containerPort: 5678
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-svc
+spec:
+  selector:
+    app: api-app
+  ports:
+  - port: 80
+    targetPort: 5678
+  type: ClusterIP
+
+
+
+
+
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-app
+  template:
+  - name: admin-pod
+    metadata:
+      labels:
+        app: admin-app
+    spec:
+      containers:
+      - name: admin-container
+        image: hashicorp/http-echo
+        args:
+        - "-text=admin"
+        ports:
+        - containerPort: 5678
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-svc
+spec:
+  selector:
+    app: admin-app
+  ports:
+  - port: 80
+    targetPort: 5678
+  type: ClusterIP
