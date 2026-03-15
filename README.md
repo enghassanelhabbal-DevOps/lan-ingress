@@ -10,7 +10,7 @@ The project simulates a **production-like traffic routing architecture** where a
 
 # 📊 Architecture Overview
 
-![Ingress Architecture](./ingress-architecture.png)
+![Ingress Architecture](./Lec-Lab-Ingress/1794e827-26b6-4234-acc9-f9a41a9ac8d9.png)
 
 The **NGINX Ingress Controller** acts as a **reverse proxy and load balancer**, routing incoming HTTP requests to the correct Kubernetes service.
 
